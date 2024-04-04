@@ -13,7 +13,7 @@ class UserView(MethodView):
         username = request.args.get("username")
         password = request.args.get("password")
         enc_password = hl.md5(password.encode()).hexdigest()
-        db_user = User.query.filter_by(username=username, password=enc_password).all()
+        db_user = User.query.filter_by(username=username, password=enc_password).first()
         if db_user is not None:
             return str(db_user)
         else:
